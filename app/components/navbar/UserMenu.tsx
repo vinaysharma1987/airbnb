@@ -1,6 +1,7 @@
 'use client'
 
 import { AiOutlineMenu } from "react-icons/ai";
+import Avatar from "../Avtar";
 
 const UserMenu = () => {
     return (
@@ -12,7 +13,7 @@ const UserMenu = () => {
             gap-3">
                 <div onClick={() => { }}
                  className="
-                 hidden 
+                  
                  mb:block
                  text-sm 
                  font-semibold 
@@ -42,7 +43,9 @@ const UserMenu = () => {
                 transition
                 ">
                     <AiOutlineMenu />
-                    <div className="hidden mb-block"></div>
+                    <div className=" mb-block">
+                        <Avatar />
+                    </div>
                 </div>
             </div>
         </div>
