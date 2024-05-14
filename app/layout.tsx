@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={ font_nunito.className} >
-        <Modal isOpen/>
+        <Modal actionLabel="Submit" secondaryActionLabel="Next item" title="Hello Vinay" isOpen/>
         <Navbar/>
         {children}</body>
     </html>
