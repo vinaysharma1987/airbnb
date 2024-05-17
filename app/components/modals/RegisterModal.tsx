@@ -9,6 +9,7 @@ import useRegisterModel from '@/app/hooks/useRegisterModel';
 import Modal from './modal';
 import { BiHeading } from 'react-icons/bi';
 import Heading from '../Heading';
+import Input from '../inputs/input';
 
 const RegisterModal = () => {
     const registerModel = useRegisterModel();
@@ -33,7 +34,19 @@ const RegisterModal = () => {
     const bodyContent = (
         <div className='
         flex flex-col gap-4'>
-            <Heading title="Welcome to Pundit ji" subtitle="Create an account"  center/>
+            <Heading 
+            title="Welcome to Pundit ji" 
+            subtitle="Create an account"  
+            center/>
+
+            <Input 
+            id="email"
+            label="Email"
+            register={register}
+            errors={errors}
+            required
+            disabled={isLoading}
+            />
         </div>
     );
     return (

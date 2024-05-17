@@ -38,7 +38,7 @@ const Modal: React.FC<ModalProps> = ({
         setShowModel(false);
         setTimeout(() => {
             onClose();
-        }, 300);
+        }, 10);
     }, [disabled, onClose]);
 
     const handleSubmit = useCallback(() => {
@@ -60,7 +60,7 @@ const Modal: React.FC<ModalProps> = ({
     return (
         <>
 
-            <div className="justify-center
+            <div id="vi_1" className="justify-center
                     items-center
                     flex 
                     overflow-x-hidden
@@ -70,8 +70,8 @@ const Modal: React.FC<ModalProps> = ({
                     z-50
                     outline-none
                     focus:outline-none
-                    bg-red-200/70">
-                <div
+                    bg-orange-200/70">
+                <div id="vi_2"
                     className="
                         relative 
                         w-full 
@@ -85,14 +85,14 @@ const Modal: React.FC<ModalProps> = ({
                         md:h-auto">
                     {/** sontent */}
 
-                    <div className="
+                    <div id="vi_3" className="
                             translate
-                            duration-300
+                            duration-50
                             h-full
                             ${showModel ? 'translate-y-0' :'translate-y-full'}
                             ${showModel ? 'opacity-100' : 'opacity-0'}
                             ">
-                        <div
+                        <div id="vi_4"
                             className="
                                 translate 
                                 h-full 
@@ -111,7 +111,7 @@ const Modal: React.FC<ModalProps> = ({
 
 
                             {/** header */}
-                            <div
+                            <div id="vi_5"
                                 className="flex 
                                         items-center 
                                         p-6
@@ -132,7 +132,7 @@ const Modal: React.FC<ModalProps> = ({
                                     <IoMdClose size={18} />
 
                                 </button>
-                                <div className=" text-lg font-semibold">
+                                <div id="vi_6" className=" text-lg font-semibold">
 
                                     {title}
 
@@ -140,12 +140,12 @@ const Modal: React.FC<ModalProps> = ({
                             </div>
 
                             {/** body */}
-                            <div className="relative p-6 flex-auto">
+                            <div id="vi_7" className="relative p-6 flex-auto">
                                 {body}
                             </div>
 
                             {/** footer */}
-                            <div className="flex flex-col gap-2 p-6 ">
+                            <div id="vi_8" className="flex flex-col gap-2 p-6 ">
                                 <div className=" 
                                 flex 
                                 flex-row 
