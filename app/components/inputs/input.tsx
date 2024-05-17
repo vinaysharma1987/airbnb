@@ -38,7 +38,7 @@ const Input: React.FC<InputProps> = ({
                 disabled={disabled}
                 {...register(id, { required })}
                 placeholder=' '
-                className="
+                className={`
                 peer
                 w-full
                 p-4
@@ -49,11 +49,11 @@ const Input: React.FC<InputProps> = ({
                 rounded-md
                 outline-none
                 transition
-                disabled:opiacity-50
+                disabled:opacity-50
                 disabled:cursor-not-allowed
                 ${formatPrice ? 'pl-9' : 'pl-4'}
                 ${errors[id] ? 'border-red-500' : 'border-natural-300'}
-                ${errors[id] ? 'focus:border-rose-500' : 'focus:border-black'}"
+                ${errors[id] ? 'focus:border-rose-500' : 'focus:border-black'}`}
 
             />
             <label htmlFor={id}
@@ -69,9 +69,9 @@ const Input: React.FC<InputProps> = ({
                 ${formatPrice ? 'left-9' : 'left-4'}
                 peer-placeholder-shown:scale-100
                 peer-placeholder-shown:translate-y-0
-                peer-focus:scale-75
-                peer-focus:translate-y-4
-                ${errors[id] ? 'text-red-500' : 'text-natural-400'}
+                peer-focus:scale-80
+                peer-focus:-translate-y-4
+                ${errors[id] ? 'text-red-500' : 'text-zinc-400'}
                 `}>{label}</label>
         </div>
     );
