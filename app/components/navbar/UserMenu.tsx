@@ -2,16 +2,26 @@
 
 import { AiOutlineMenu } from "react-icons/ai";
 import Avatar from "../Avtar";
-import { useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import MenuItem from "./MenuItem";
 import useRegisterModel from "@/app/hooks/useRegisterModel";
+import useLoginModel from "@/app/hooks/useLoginModel";
+import { User } from "@prisma/client";
+import { signOut } from "next-auth/react";
 
-const UserMenu = () => {
+interface UserMenuProps {
+    currentUser?: User | null;
+}
+
+const UserMenu: React.FC<UserMenuProps> = ({
+    currentUser,
+}) => {
     const [isOpen, setIsOpen] = useState(false);
     const registerModel = useRegisterModel();
+    const loginModel = useLoginModel();
     const toggleOpen = useCallback(() => {
         setIsOpen((value) => !value);
-    }, [] )
+    }, [])
     return (
         <div className="relative">
             <div className="
@@ -20,7 +30,7 @@ const UserMenu = () => {
             items-center
             gap-3">
                 <div onClick={() => { }}
-                 className="
+                    className="
                   
                  mb:block
                  text-sm 
@@ -35,8 +45,8 @@ const UserMenu = () => {
                     Airbng Your Home
                 </div>
                 <div
-                onClick={toggleOpen}
-                className="
+                    onClick={toggleOpen}
+                    className="
                 p-4
                 mb:py-1
                 mb:px-2
@@ -69,11 +79,24 @@ const UserMenu = () => {
                 top-12
                 text-sm">
                     <div
-                    className="flex flex-col cursor-pointer">
-                        <MenuItem onClick={() => {}} label="login" /> 
-                        <MenuItem onClick={() => {registerModel.onOpen()}} label="Sign up" /> 
-                        <MenuItem onClick={() => {}} label="Request Demo" /> 
+                        className="flex flex-col cursor-pointer">
 
+                        {currentUser ? (
+                            <>
+                                <MenuItem onClick={() => { }} label="My Trips" />
+                                <MenuItem onClick={() => { }} label="MY Favorites" />
+                                <MenuItem onClick={() => { }} label="Reservations" />
+                                <MenuItem onClick={() => { }} label="My Properties" />
+                                <MenuItem onClick={() => { }} label="My Home" />
+                                <MenuItem onClick={() => { signOut() }} label="Logout" />
+                            </>
+                        ) : (
+                            <>
+                                <MenuItem onClick={() => { loginModel.onOpen() }} label="login" />
+                                <MenuItem onClick={() => { registerModel.onOpen() }} label="Sign up" />
+                                <MenuItem onClick={() => { }} label="Request Demo" />
+                            </>
+                        )}
                     </div>
                 </div>
             )}

@@ -6,46 +6,56 @@ import { FcGoogle } from 'react-icons/fc';
 import { useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import useRegisterModel from '@/app/hooks/useRegisterModel';
+import useLoginModel from '@/app/hooks/useLoginModel';
 import Modal from './modal';
 import Heading from '../Heading';
 import Input from '../inputs/input';
 import toast from 'react-hot-toast';
 import Button from '../Button';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
-const RegisterModal = () => {
+const LoginModal = () => {
     const registerModel = useRegisterModel();
+    const loginModel = useLoginModel();
+    const router = useRouter();
+    
     const [isLoading, setIsLoading] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm<FieldValues>({
         defaultValues: {
-            name: '',
             email: '',
             password: ''
-
         }
     });
 
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
         setIsLoading(true);
-        axios.post('/api/register', data)
-            .then(() => {
-                registerModel.onClose();
-                toast.success('Registration successful!');
-            })
-            .catch((error) => {
-                toast.error(error.statusText || 'An error occurred \n' + error.statusText + ' ' + error.message);
-            })
-            .finally(() => {
-                setIsLoading(false);
-            });
+        signIn('credentials', {
+            ...data,
+            redirect: false,
+        })
+        .then((callback) => {
+            setIsLoading(false);
+            if(callback?.ok) {
+                toast.success('Login Successfull');
+                router.refresh();
+                loginModel.onClose();
+            }
+
+            if(callback?.error) {
+                toast.error(callback.error);
+            }
+        
+        })
     }
 
     const bodyContent = (
         <div className='
         flex flex-col gap-4'>
             <Heading
-                title="Welcome to Pundit ji"
-                subtitle="Create an account"
+                title="Welcome Back!"
+                subtitle="Login to your account"
                 center />
 
             <Input
@@ -58,15 +68,6 @@ const RegisterModal = () => {
                 disabled={isLoading}
             />
 
-            <Input
-                id="name"
-                label="Name"
-                type='text'
-                register={register}
-                errors={errors}
-                required
-                disabled={isLoading}
-            />
 
             <Input
                 id="password"
@@ -118,10 +119,10 @@ const RegisterModal = () => {
     return (
         <Modal
             disabled={isLoading}
-            isOpen={registerModel.isOpen}
-            title="Register"
+            isOpen={loginModel.isOpen}
+            title="Login"
             actionLabel="continue"
-            onClose={registerModel.onClose}
+            onClose={loginModel.onClose}
             onSubmit={handleSubmit(onSubmit)}
             body={bodyContent}
             footer={footerContent}
@@ -129,4 +130,4 @@ const RegisterModal = () => {
     );
 }
 
-export default RegisterModal;
+export default LoginModal;
