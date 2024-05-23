@@ -16,9 +16,8 @@ datasource db {
 model User {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   name String?
-
   email String ? @unique
-  emailverified DateTime?
+  emailVerified DateTime?
   image String?
   hashedPassword String?
   createdAt DateTime @default(now())
@@ -32,16 +31,16 @@ model User {
 
 model Account {
   id String @id @default(auto()) @map("_id") @db.ObjectId
-  userID String @map("userId") @db.ObjectId
+  userID String  @db.ObjectId
   type String
   provider String
   providerAccountId String
   refreshToken String? @db.String
   accessToken String? @db.String
-  expiresAt Int?
+  expires_at Int?
   token_type String?
   scope String?
-  id_token String?
+  id_token String? @db.String
   session_state String?
   
   user User @relation(fields: [userID], references: [id], onDelete: Cascade)
